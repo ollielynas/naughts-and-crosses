@@ -7,7 +7,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.App-Row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-Body {
+  text-align: center;
+  height: 60vh;
+  width: 60vh;
+}
+
+.App-button {
+  position: reletive;
+  height: 10vh;
+  width: 10vh;
+  border: 3px solid #000;
+  background-color: #ffffff;
+
 }

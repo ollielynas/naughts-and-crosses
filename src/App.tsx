@@ -40,6 +40,13 @@ let array: string[][] = matrix;
   }
   let firstTurn: boolean = true;
 
+  let winnstate: number[][][] = [
+    [[0, 0], [0, 1], [0, 2]],
+    [[1, 0], [1, 1], [1, 2]],
+    
+  ];
+
+
   const bottTurn = () => {
     if (firstTurn) {
       firstTurn = false;

@@ -40,14 +40,21 @@ let array: string[][] = matrix;
   }
   let firstTurn: boolean = true;
 
-  let winnstate: number[][][] = [
+  let winState: number[][][] = [
     [[0, 0], [0, 1], [0, 2]],
     [[1, 0], [1, 1], [1, 2]],
-    
+    [[2, 0], [2, 1], [2, 2]],
+    [[0, 0], [1, 0], [2, 0]],
+    [[0, 1], [1, 1], [2, 1]],
+    [[0, 2], [1, 2], [2, 2]],
+    [[0, 0], [1, 1], [2, 2]],
+    [[2, 0], [1, 1], [0,2]]
   ];
 
 
   const bottTurn = () => {
+    let emptySpace: number = 0;
+    let OSpace: number = 0;
     if (firstTurn) {
       firstTurn = false;
       if (matrix[1][1]===" ") {array[1][1] = "O"; setMatrix(array);
@@ -55,14 +62,25 @@ let array: string[][] = matrix;
 
     }else{
       // -----------------------cheack if the bot can win------------------------------
-      for (let i: number = 0; i < 3; i++) {
-        if (matrix[i][0] == "O" && matrix[i][2] == "O" && matrix[i][1] == " ") {array[i][1] = "O"; setMatrix(array)}
-      }
-      for (let i: number = 0; i < 3; i++) {
-        if (matrix[i][1] == "O" && matrix[i][2] == "O") {array[i][0] = "O"; setMatrix(array)}
-      }
-      for (let i: number = 0; i < 3; i++) {
-        if (matrix[i][1] == "O" && matrix[i][0] == "O") {array[i][1] = "O"; setMatrix(array)}
+      for (var i = 0; i < winState.length; i++) {
+        for (var j = 0; j < 3; j++) {
+          if (matrix[winState[i][j][0]][winState[i][j][1]] === " ") {
+            emptySpace ++;
+        }
+        else if (matrix[winState[i][j][0]][winState[i][j][1]] === "O") {
+            OSpace ++;
+          }
+        if (OSpace == 2 && emptySpace == 1) {
+          for (var k = 0; k < 3; k++) {
+            if (matrix[winState[i][k][0]][winState[i][k][1]] === " ") {
+              array[winState[i][k][0]][winState[i][k][1]] = "O";
+              setMatrix(array);
+              updateMatrix();
+              return;
+            }
+          }
+        }
+        }
       }
 
     }

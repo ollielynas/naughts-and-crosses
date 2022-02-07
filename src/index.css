@@ -23,16 +23,45 @@ body {
 }
 
 .App-Body {
+  position: relative;
+  
+  z-index: 1;
   text-align: center;
-  height: 60vh;
-  width: 60vh;
+  height: 30vh;
+  width: 30vh;
 }
 
 .App-button {
-  position: reletive;
+  position: relative;
   height: 10vh;
   width: 10vh;
-  border: 3px solid #000;
+  border: 2px solid #000;
   background-color: #ffffff;
+  margin: -2px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 
+}
+
+.App-border {
+  z-index: 10;
+  position: absolute;
+
+  top: -7px;
+  left: -7px;
+  border: 15px solid rgb(255, 255, 255);
+  height: calc(30vh - 24px);
+  width: calc(30vh - 25px);
+  pointer-events: none;
+}
+
+.App-button-text {
+  top: 50%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  height: 10vh;
+  width: 10vh;
+  position: absolute;
+  font-size: 4vh;
 }

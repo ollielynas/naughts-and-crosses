@@ -81,6 +81,18 @@ function App() {
     let emptySpace: number = 0;  // cheack for win event
     let OSpace: number = 0;
     let XSpace: number = 0;
+
+    if (
+      matrix[0][0] === "O" &&
+      matrix[0][1] === "O" &&
+      matrix[0][2] === "O"&&
+      matrix[1][0] === "O"
+      && matrix[1][1] === "O"
+      && matrix[1][2] === "O"
+      && matrix[2][0] === "O"
+      && matrix[2][1] === "O"
+      && matrix[0][2] === "O") {setTie(parseInt(tie) + 1, 100); reset(); return;}
+
     for (var i = 0; i < winState.length; i++) {
       emptySpace = 0;
       OSpace = 0;
@@ -122,7 +134,7 @@ function App() {
     let OSpace: number = 0;
     let XSpace: number = 0;
     turn++;
-    console.log("turn 1: " + turn);
+    console.log("turn 1: " + turn); //-------------- first turn ------------------------
     if (turn === 1) {
       console.log("first turn " + turn);
       if (matrix[1][1] === " ") {
@@ -195,6 +207,29 @@ function App() {
         if (OSpace == 3) { console.log("win"); reset(); }
         if (XSpace == 3) { console.log("win"); reset(); }
       }
+
+      //----------------------------------------- custom move -------------------------------------------------
+
+      if (matrix[0][0] === "X" && matrix[2][2] === "X" && matrix[1][1] === "O") {  
+        array[2][1] = "O"; setMatrix(array); return
+      }
+      
+      if (matrix[2][0] === "X" && matrix[0][2] === "X" && matrix[1][1] === "O") {  
+        array[2][1] = "O"; setMatrix(array); return
+      }
+
+      if (matrix[2][1] === "X" && matrix[1][2] === "X" && matrix[1][1] === "O") {  
+        array[2][2] = "O"; setMatrix(array); return
+      }
+
+      if (matrix[2][1] === "X" && matrix[1][0] === "X" && matrix[1][1] === "O") {  
+        array[2][0] = "O"; setMatrix(array); return
+      }
+
+      if (matrix[2][1] === "X" && matrix[1][0] === "X" && matrix[1][1] === "O") {  
+        array[2][0] = "O"; setMatrix(array); return
+      }
+
       //----------------------------------------------------- secound thing -------------------------------------------------
       for (var i = 0; i < winState.length; i++) {
         let emptySpace: number = 0;
@@ -304,7 +339,8 @@ function App() {
         <p className="App-score-text">{("bot: " + bot)}</p>
         <p className="App-score-text">{"player: " + player}</p>
         <p className="App-score-text">{"tie: " + tie}</p>
-        {/* <p className="App-score-text" onClick={console.log()}>{start}</p> */}
+        <button className="App-score-text" onClick={()=>{reset(); botTurn();}}>bot start {'\u00A0'}|</button>
+        <button className="App-score-text" onClick={()=>{reset();}}>reset</button>
       </div>
     </div>
   );

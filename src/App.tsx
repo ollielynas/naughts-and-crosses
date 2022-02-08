@@ -304,7 +304,7 @@ function App() {
         <p className="App-score-text">{("bot: " + bot)}</p>
         <p className="App-score-text">{"player: " + player}</p>
         <p className="App-score-text">{"tie: " + tie}</p>
-        <p className="App-score-text" onClick={console.log()}>{start}</p>
+        {/* <p className="App-score-text" onClick={console.log()}>{start}</p> */}
       </div>
     </div>
   );

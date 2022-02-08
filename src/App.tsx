@@ -218,15 +218,19 @@ function App() {
         array[2][1] = "O"; setMatrix(array); return
       }
 
-      if (matrix[2][1] === "X" && matrix[1][2] === "X" && matrix[1][1] === "O") {  
+      if (matrix[2][1] === "X" && matrix[1][2] === "X" && matrix[1][1] === "O" && turn == 2) {  
         array[2][2] = "O"; setMatrix(array); return
       }
 
-      if (matrix[2][1] === "X" && matrix[1][0] === "X" && matrix[1][1] === "O") {  
+      if (matrix[2][1] === "X" && matrix[1][0] === "X" && matrix[1][1] === "O" && turn == 2) {  
         array[2][0] = "O"; setMatrix(array); return
       }
 
-      if (matrix[2][1] === "X" && matrix[1][0] === "X" && matrix[1][1] === "O") {  
+      if (matrix[2][1] === "X" && matrix[0][1] === "X" && matrix[1][1] === "O") {  
+        array[2][0] = "O"; setMatrix(array); return
+      }
+
+      if (matrix[0][2] === "X" && matrix[0][1] === "X" && matrix[1][1] === "O") {  
         array[2][0] = "O"; setMatrix(array); return
       }
 

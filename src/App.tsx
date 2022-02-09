@@ -226,13 +226,15 @@ function App() {
         array[2][0] = "O"; setMatrix(array); return
       }
 
-      if (matrix[2][1] === "X" && matrix[0][1] === "X" && matrix[1][1] === "O") {  
+      if (matrix[2][1] === "X" && matrix[0][2] === "X" && matrix[1][1] === "O" && turn == 2) {  
+        array[2][2] = "O"; setMatrix(array); return
+      }
+
+      if (matrix[0][0] === "X" && matrix[2][1] === "X" && matrix[1][1] === "O" && turn == 2) {  
         array[2][0] = "O"; setMatrix(array); return
       }
 
-      if (matrix[0][2] === "X" && matrix[0][1] === "X" && matrix[1][1] === "O") {  
-        array[2][0] = "O"; setMatrix(array); return
-      }
+
 
       //----------------------------------------------------- secound thing -------------------------------------------------
       for (var i = 0; i < winState.length; i++) {
@@ -344,7 +346,7 @@ function App() {
         <p className="App-score-text">{"player: " + player}</p>
         <p className="App-score-text">{"tie: " + tie}</p>
         <button className="App-score-text" onClick={()=>{reset(); botTurn();}}>bot start {'\u00A0'}|</button>
-        <button className="App-score-text" onClick={()=>{reset();}}>reset</button>
+        <button className="App-score-text" onClick={()=>{setTie(parseInt(tie) + 1, 100); reset();}}>reset</button>
       </div>
     </div>
   );

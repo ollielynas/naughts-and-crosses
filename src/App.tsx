@@ -9,28 +9,36 @@ function App() {
   let [matrix, setMatrix] = useState([[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]);
 
   //for some reason this is needed to update the text in the buttons
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix00, setMatrix00] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix01, setMatrix10] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix02, setMatrix20] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix10, setMatrix01] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix11, setMatrix11] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix12, setMatrix21] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix20, setMatrix02] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix21, setMatrix12] = useState(" ");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let [matrix22, setMatrix22] = useState(" ");
 
-  let [start, setStart] = useState("Player starts");
 
-  function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
+//   function deleteAllCookies() {
+//     var cookies = document.cookie.split(";");
 
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-}
+//     for (var i = 0; i < cookies.length; i++) {
+//         var cookie = cookies[i];
+//         var eqPos = cookie.indexOf("=");
+//         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+//         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+//     }
+// }
 // deleteAllCookies();
 
 
@@ -40,7 +48,7 @@ function App() {
 
 
 
-  const updateMatrix = () => { // idk why this is nessary
+  const updateMatrix = () => {
     setMatrix00(matrix[0][0]);
     setMatrix01(matrix[0][1]);
     setMatrix02(matrix[0][2]);
@@ -78,7 +86,6 @@ function App() {
   ];
 
   let checkWin = () => {
-    let emptySpace: number = 0;  // cheack for win event
     let OSpace: number = 0;
     let XSpace: number = 0;
 
@@ -92,9 +99,10 @@ function App() {
       && matrix[2][0] === "O"
       && matrix[2][1] === "O"
       && matrix[0][2] === "O") {setTie(parseInt(tie) + 1, 100); reset(); return;}
+      
+
 
     for (var i = 0; i < winState.length; i++) {
-      emptySpace = 0;
       OSpace = 0;
       XSpace = 0;
       for (var j = 0; j < 3; j++) {
@@ -104,8 +112,8 @@ function App() {
         } else if (matrix[winState[i][j][0]][winState[i][j][1]] === "X") {
           XSpace++;
         }
-      } if (OSpace == 3) { console.log("win"); reset(); setBot(parseInt(bot) + 1, 100); return; }
-      if (XSpace == 3) { console.log("win"); reset(); setPlayer(parseInt(player) + 1, 100); return; } // end cheack for win
+      } if (OSpace === 3) {console.log("win 1"); reset(); setBot(parseInt(bot) + 1, 100); return; }
+      if (XSpace === 3) {console.log("win 2"); reset(); setPlayer(parseInt(player) + 1, 100); return; } // end check for win
     }
 
 
@@ -130,7 +138,6 @@ function App() {
   }
 
   const botTurn = () => {
-    let emptySpace: number = 0;
     let OSpace: number = 0;
     let XSpace: number = 0;
     turn++;
@@ -142,7 +149,7 @@ function App() {
       } else { array[2][0] = "O"; setMatrix(array); }
 
     } else {
-      // -----------------------cheack if the bot can win------------------------------
+      // -----------------------check if the bot can win------------------------------
       for (var i = 0; i < winState.length; i++) {
         let emptySpace: number = 0;
         let OSpace: number = 0;
@@ -204,8 +211,9 @@ function App() {
             }
           }
         }
-        if (OSpace == 3) { console.log("win"); reset(); }
-        if (XSpace == 3) { console.log("win"); reset(); }
+
+        if (OSpace === 3) {console.log("win o");  reset(); }
+        if (XSpace === 3) {console.log("win x");  reset(); }
       }
 
       //----------------------------------------- custom move -------------------------------------------------
@@ -218,19 +226,23 @@ function App() {
         array[2][1] = "O"; setMatrix(array); return
       }
 
-      if (matrix[2][1] === "X" && matrix[1][2] === "X" && matrix[1][1] === "O" && turn == 2) {  
+      if (matrix[2][1] === "X" && matrix[1][2] === "X" && matrix[1][1] === "O" && turn === 2) {  
         array[2][2] = "O"; setMatrix(array); return
       }
 
-      if (matrix[2][1] === "X" && matrix[1][0] === "X" && matrix[1][1] === "O" && turn == 2) {  
+      if (matrix[2][0] === "X" && matrix[1][2] === "X" && matrix[1][1] === "O" && turn === 2) {  
+        array[2][2] = "O"; setMatrix(array); return
+      }
+
+      if (matrix[2][1] === "X" && matrix[1][0] === "X" && matrix[1][1] === "O" && turn === 2) {  
         array[2][0] = "O"; setMatrix(array); return
       }
 
-      if (matrix[2][1] === "X" && matrix[0][2] === "X" && matrix[1][1] === "O" && turn == 2) {  
+      if (matrix[2][1] === "X" && matrix[0][2] === "X" && matrix[1][1] === "O" && turn === 2) {  
         array[2][2] = "O"; setMatrix(array); return
       }
 
-      if (matrix[0][0] === "X" && matrix[2][1] === "X" && matrix[1][1] === "O" && turn == 2) {  
+      if (matrix[0][0] === "X" && matrix[2][1] === "X" && matrix[1][1] === "O" && turn === 2) {  
         array[2][0] = "O"; setMatrix(array); return
       }
 
@@ -255,7 +267,7 @@ function App() {
           //console.log("places: empty" + emptySpace+" O: "+OSpace+" O: "+XSpace);
 
           // --------------------- playing move --------------------------------------
-          if (OSpace == 1 && emptySpace == 2) {
+          if (OSpace === 1 && emptySpace === 2) {
 
             console.log("space: " + winState[i][j])
             for (var k = 0; k < 3; k++) {
@@ -267,8 +279,8 @@ function App() {
                 return;
               }
             }
-          } else if (XSpace == 1 && emptySpace == 2) {
-            for (var k = 0; k < 3; k++) {
+          } else if (XSpace === 1 && emptySpace === 2) {
+            for (k = 0; k < 3; k++) {
               console.log("space2: " + winState[i][j])
               if (matrix[winState[i][k][0]][winState[i][k][1]] === " ") {
                 array[winState[i][k][0]][winState[i][k][1]] = "O";
@@ -280,15 +292,15 @@ function App() {
           } else {
 
             console.log("defalt");
-            if (matrix[1][1] == " ") { array[1][1] = "O"; setMatrix(array); return }
-            else if (matrix[0][0] == " ") { array[0][0] = "O"; setMatrix(array); return }
-            else if (matrix[0][2] == " ") { array[0][2] = "O"; setMatrix(array); return }
-            else if (matrix[2][0] == " ") { array[2][0] = "O"; setMatrix(array); return }
-            else if (matrix[2][2] == " ") { array[2][2] = "O"; setMatrix(array); return }
-            else if (matrix[1][0] == " ") { array[1][0] = "O"; setMatrix(array); return }
-            else if (matrix[1][2] == " ") { array[1][2] = "O"; setMatrix(array); return }
-            else if (matrix[0][1] == " ") { array[0][1] = "O"; setMatrix(array); return }
-            else if (matrix[2][1] == " ") { array[2][1] = "O"; setMatrix(array); return }
+            if (matrix[1][1] === " ") { array[1][1] = "O"; setMatrix(array); return }
+            else if (matrix[0][0] === " ") { array[0][0] = "O"; setMatrix(array); return }
+            else if (matrix[0][2] === " ") { array[0][2] = "O"; setMatrix(array); return }
+            else if (matrix[2][0] === " ") { array[2][0] = "O"; setMatrix(array); return }
+            else if (matrix[2][2] === " ") { array[2][2] = "O"; setMatrix(array); return }
+            else if (matrix[1][0] === " ") { array[1][0] = "O"; setMatrix(array); return }
+            else if (matrix[1][2] === " ") { array[1][2] = "O"; setMatrix(array); return }
+            else if (matrix[0][1] === " ") { array[0][1] = "O"; setMatrix(array); return }
+            else if (matrix[2][1] === " ") { array[2][1] = "O"; setMatrix(array); return }
             else { setTie(parseInt(tie) + 1, 100); reset(); return; }
           }
         }
@@ -298,24 +310,24 @@ function App() {
     }
 
 
-    for (var i = 0; i < winState.length; i++) {
+    for (var e = 0; e < winState.length; e++) {
       let emptySpace: number = 0;
       let OSpace: number = 0;
       let XSpace: number = 0;
       for (var j = 0; j < 3; j++) {
 
-        if (matrix[winState[i][j][0]][winState[i][j][1]] === " ") {
+        if (matrix[winState[e][j][0]][winState[e][j][1]] === " ") {
           emptySpace++;
         }
-        else if (matrix[winState[i][j][0]][winState[i][j][1]] === "O") {
+        else if (matrix[winState[e][j][0]][winState[e][j][1]] === "O") {
           OSpace++;
-        } else if (matrix[winState[i][j][0]][winState[i][j][1]] === "X") {
+        } else if (matrix[winState[e][j][0]][winState[e][j][1]] === "X") {
           XSpace++;
         }
       }
+      if (OSpace === 3) { console.log("win"); reset(); setBot(parseInt(bot) + 1, 100); return; }
+      if (XSpace === 3) { console.log("win"); reset(); setPlayer(parseInt(player) + 1, 100); return; }
     }
-    if (OSpace == 3) { console.log("win"); reset(); setBot(parseInt(bot) + 1, 100); return; }
-    if (XSpace == 3) { console.log("win"); reset(); setPlayer(parseInt(player) + 1, 100); return; }
   }
 
 
